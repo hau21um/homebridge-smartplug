@@ -69,52 +69,31 @@ function smartPlugAccessory(log, airos_sessionid, outlet) {
 smartPlugAccessory.prototype.setState = function(state, callback) {
   var exec = require('child_process').exec;
   state = (state == true || state == 1) ? 1 : 0;
-  
-  var cmdAuth = 'curl -X POST -d "username=' + this.username + '&password=' + this.password + '" -b "AIROS_SESSIONID=' + this.airos_sessionid + '" ' + this.url + '/login.cgi';
-  var cmdUpdate = 'curl -X POST -d "output=' + state+ '" -b "AIROS_SESSIONID=' + this.airos_sessionid + '" ' + this.url + '/sensors/' + this.id;
-
+  var cmdUpdate = 'sshpass -p' + this.password + ' ssh -o StrictHostKeyChecking=no ' + this.username + '@' + this.url + ' "echo ' + state + ' > /sys/class/leds/tp-link\:blue\:relay/brightness"';
   var stateName = (state == 1) ? 'on' : 'off';
-
   this.log("Turning " + this.name + " outlet " + stateName + ".");
-
-  exec(cmdAuth, function(error, stdout, stderr) {
-    if (!error) {
       exec(cmdUpdate, function(error, stdout, stderr) {
         if (!error) {
-          if (stdout != "") {
-            var response = JSON.parse(stdout);
-
-            if(response.status == "success") {
+            var response = stdout;
+            if("success" == "success") {
               callback(null);
             } else {
               callback(error);
             }
-          } else {
-            console.log("Failed with error: " + error);
-          }
         }
       });
-    } else {
-      console.log("Failed with error: " + error);
-    }
-  });
 }
 
 smartPlugAccessory.prototype.getState = function(callback) {
   var exec = require('child_process').exec;
-
-  var cmdAuth = 'curl -X POST -d "username=' + this.username + '&password=' + this.password + '" -b "AIROS_SESSIONID=' + this.airos_sessionid + '" ' + this.url + '/login.cgi';
-  var cmdStatus = 'curl -b "AIROS_SESSIONID=' + this.airos_sessionid + '" ' + this.url + '/sensors/' + this.id + '/output';
-
-  exec(cmdAuth, function(error, stdout, stderr) {
-    if (!error) {
+  var cmdStatus = 'sshpass -p' + this.password + ' ssh -o StrictHostKeyChecking=no ' + this.username + '@' + this.url + ' "cat /sys/class/leds/tp-link\:blue\:relay/brightness"';
       exec(cmdStatus, function(error, stdout, stderr) {
         if (!error) {
           if (stdout != "") {
-            var state = JSON.parse(stdout);
-            if(state.sensors[0].output == 1) {
+            var state = stdout;
+            if(state == 1) {
               callback(null, true);
-            } else if(state.sensors[0].output == 0) {
+            } else if(state == 0) {
               callback(null, false);
             }
             else {
@@ -127,43 +106,10 @@ smartPlugAccessory.prototype.getState = function(callback) {
           console.log("Failed with error: " + error);
         }
       });
-    } else {
-      console.log("Failed with error: " + error);
-    }
-  });
 }
 
 smartPlugAccessory.prototype.getOutletInUse = function(callback) {
-  var exec = require('child_process').exec;
-
-  var cmdAuth = 'curl -X POST -d "username=' + this.username + '&password=' + this.password + '" -b "AIROS_SESSIONID=' + this.airos_sessionid + '" ' + this.url + '/login.cgi';
-  var cmdOutletInUseStatus = 'curl -b "AIROS_SESSIONID=' + this.airos_sessionid + '" ' + this.url + '/sensors/' + this.id + '/power';
-
-  exec(cmdAuth, function(error, stdout, stderr) {
-    if (!error) {
-      exec(cmdOutletInUseStatus, function(error, stdout, stderr) {
-        if (!error) {
-          if (stdout != "") {
-            var state = JSON.parse(stdout);
-            if(state.sensors[0].power > 0) {
-              callback(null, true);
-            } else if(state.sensors[0].power == 0) {
-              callback(null, false);
-            }
-	    else {
-              callback(error);
-            }
-          } else {
-            console.log("Failed to communicate with smartPlug accessory");
-          }
-        } else {
-          console.log("Failed with error: " + error);
-        }
-      });
-    } else {
-      console.log("Failed with error: " + error);
-    }
-  });
+  return callback(null, true);
 }
 
 smartPlugAccessory.prototype.getDefaultValue = function(callback) {
