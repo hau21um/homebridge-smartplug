@@ -4,7 +4,7 @@ This is a plugin for [homebridge](https://github.com/nfarina/homebridge). It all
 # Installation
 
 1. Install homebridge (if not already installed) using: `npm install -g homebridge`
-2. Install plugin - npm install -g homebridge-smartplug
+2. Install plugin - `npm install -g homebridge-smartplug`
 3. Update your configuration file. See below for a sample.
 4. ensure sshpass is installed
 
