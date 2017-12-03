@@ -1,0 +1,25 @@
+{
+  "name": "homebridge-smartplug",
+  "version": "1.0.0",
+  "description": "Kankun SmartPlug plugin for homebridge",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hau21um/homebridge-smartplug.git"
+  },
+  "keywords": [
+    "homebridge",
+    "Kankun",
+    "K1",
+    "SmartPlug"
+  ],
+  "author": "Milos Hauser",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hau21um/homebridge-smartplug/issues"
+  },
+  "homepage": "https://github.com/hau21um/homebridge-smartplug#readme"
+}

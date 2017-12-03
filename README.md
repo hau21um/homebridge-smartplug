@@ -4,7 +4,7 @@ This is a plugin for [homebridge](https://github.com/nfarina/homebridge). It all
 # Installation
 
 1. Install homebridge (if not already installed) using: `npm install -g homebridge`
-2. Download/clone into home-bridge plugin directory (in my case - /usr/local/lib/node_modules/homebridge-smartplug)
+2. Install plugin - npm install -g homebridge-smartplug
 3. Update your configuration file. See below for a sample.
 4. ensure sshpass is installed
 
@@ -34,11 +34,11 @@ This is a plugin for [homebridge](https://github.com/nfarina/homebridge). It all
 | `username` | Your Kankun SmartPlug Controller username |
 | `password` | Your Kankun Controller password |
 | `url` | May be either a hostname or an IP address |
-| `id` | So fara one one outlet controler is supported ( ==> id=1 )  |
+| `id` | So far one one outlet controler is supported ( ==> id=1 )  |
 
 
 # How it works
-This plugin is basically a homebridge-compatible implementation of on/of status hacking found  on [Hacking Kankun Smart Wifi Plug](http://www.anites.com/2015/01/hacking-kankun-smart-wifi-plug.html). It reads/writes from /sys filesystem of SmartPlug device via ssh and utilising sshpass to toggle the device `on` or `off`.
+This plugin is basically a homebridge-compatible implementation of on/off status hacking found  on [Hacking Kankun Smart Wifi Plug](http://www.anites.com/2015/01/hacking-kankun-smart-wifi-plug.html). It reads/writes from /sys filesystem of SmartPlug device via ssh and utilising sshpass to toggle the device `on` or `off`.
 
 # Acknowledgements
 This work was inspired/based by/on [homebridge-mpower](git+https://github.com/wr/homebridge-mpower.git) 
