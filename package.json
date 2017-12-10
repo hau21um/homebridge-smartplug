@@ -11,11 +11,15 @@
     "url": "git+https://github.com/hau21um/homebridge-smartplug.git"
   },
   "keywords": [
-    "homebridge",
+    "homebridge-plugin",
     "Kankun",
     "K1",
     "SmartPlug"
   ],
+  "engines": {
+    "homebridge": ">=0.2.0",
+    "node": ">=0.12.0"
+  },
   "author": "Milos Hauser",
   "license": "MIT",
   "bugs": {
