@@ -38,7 +38,8 @@ This is a plugin for [homebridge](https://github.com/nfarina/homebridge). It all
 
 
 # How it works
-This plugin is basically a homebridge-compatible implementation of on/off status hacking found  on [Hacking Kankun Smart Wifi Plug](http://www.anites.com/2015/01/hacking-kankun-smart-wifi-plug.html). It reads/writes from /sys filesystem of SmartPlug device via ssh and utilising sshpass to toggle the device `on` or `off`.
+This plugin is basically a homebridge-compatible implementation of on/off status hacking found  on [Hacking Kankun Smart Wifi Plug](http://www.anites.com/2015/01/hacking-kankun-smart-wifi-plug.html). It reads/writes from /sys filesystem of SmartPlug device via ssh and utilising sshpass to toggle the device `on` or `off`. 
+To speed up the communication configure your ssh @ homebirdge server to "Reuse SSH Connection" (https://www.tecmint.com/speed-up-ssh-connections-in-linux/).
 
 # Acknowledgements
 This work was inspired/based by/on [homebridge-mpower](git+https://github.com/wr/homebridge-mpower.git) 
