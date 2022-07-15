@@ -1,6 +1,6 @@
 {
   "name": "homebridge-smartplug",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Kankun SmartPlug plugin for homebridge",
   "main": "index.js",
   "scripts": {
