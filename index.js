@@ -69,7 +69,7 @@ function smartPlugAccessory(log, airos_sessionid, outlet) {
 smartPlugAccessory.prototype.setState = function(state, callback) {
   var exec = require('child_process').exec;
   state = (state == true || state == 1) ? 1 : 0;
-  var cmdUpdate = 'sshpass -p' + this.password + ' ssh -o StrictHostKeyChecking=no ' + this.username + '@' + this.url + ' "echo ' + state + ' > /sys/class/leds/tp-link\:blue\:relay/brightness"';
+  var cmdUpdate = 'sshpass -p' + this.password + ' ssh -o StrictHostKeyChecking=no -o KexAlgorithms=+diffie-hellman-group1-sha1 ' + this.username + '@' + this.url + ' "echo ' + state + ' > /sys/class/leds/tp-link\:blue\:relay/brightness"';
   var stateName = (state == 1) ? 'on' : 'off';
   this.log("Turning " + this.name + " outlet " + stateName + ".");
       exec(cmdUpdate, function(error, stdout, stderr) {
@@ -86,7 +86,7 @@ smartPlugAccessory.prototype.setState = function(state, callback) {
 
 smartPlugAccessory.prototype.getState = function(callback) {
   var exec = require('child_process').exec;
-  var cmdStatus = 'sshpass -p' + this.password + ' ssh -o StrictHostKeyChecking=no ' + this.username + '@' + this.url + ' "cat /sys/class/leds/tp-link\:blue\:relay/brightness"';
+  var cmdStatus = 'sshpass -p' + this.password + ' ssh -o StrictHostKeyChecking=no -o KexAlgorithms=+diffie-hellman-group1-sha1 ' + this.username + '@' + this.url + ' "cat /sys/class/leds/tp-link\:blue\:relay/brightness"';
       exec(cmdStatus, function(error, stdout, stderr) {
         if (!error) {
           if (stdout != "") {
